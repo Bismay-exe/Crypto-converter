@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Converter - Premium Crypto Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'dark-bg': '#0F172A',
+                        'dark-card': '#1E293B',
+                        'neon-green': '#00FF88',
+                        'neon-blue': '#00D4FF',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'fade-in': 'fadeIn 1s ease-out',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dark-bg text-white font-inter overflow-x-hidden">
+    <!-- Sticky Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-dark-bg/80 border-b border-white/10">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="text-2xl font-bold bg-gradient-to-r from-neon-green to-neon-blue bg-clip-text text-transparent">
+                    Crypto Converter
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-white/80 hover:text-neon-green transition-colors duration-300">Home</a>
+                    <a href="#calculator" class="nav-link text-white/80 hover:text-neon-green transition-colors duration-300">Calculator</a>
+                    <a href="#about" class="nav-link text-white/80 hover:text-neon-green transition-colors duration-300">About</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-white/80 hover:text-neon-green transition-colors duration-300">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="#home" class="nav-link text-white/80 hover:text-neon-green transition-colors duration-300">Home</a>
+                    <a href="#calculator" class="nav-link text-white/80 hover:text-neon-green transition-colors duration-300">Calculator</a>
+                    <a href="#about" class="nav-link text-white/80 hover:text-neon-green transition-colors duration-300">About</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- Animated Background -->
+        <div class="absolute inset-0 z-0">
+            <svg class="absolute inset-0 w-full h-full" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#00FF88;stop-opacity:0.1" />
+                        <stop offset="100%" style="stop-color:#00D4FF;stop-opacity:0.1" />
+                    </linearGradient>
+                </defs>
+                <path class="animate-float" d="M0,400 C300,200 600,600 1200,300 L1200,800 L0,800 Z" fill="url(#gradient1)" />
+                <path class="animate-float" style="animation-delay: -2s;" d="M0,500 C400,300 800,700 1200,400 L1200,800 L0,800 Z" fill="url(#gradient1)" opacity="0.5" />
+            </svg>
+        </div>
+        
+        <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-neon-green to-neon-blue bg-clip-text text-transparent animate-slide-up">
+                Track Crypto Prices in INR
+            </h1>
+            <p class="text-xl md:text-2xl text-white/80 mb-8 animate-fade-in" style="animation-delay: 0.3s;">
+                Premium cryptocurrency calculator with real-time INR conversions
+            </p>
+            <button id="cta-button" class="glass-button bg-gradient-to-r from-neon-green/20 to-neon-blue/20 backdrop-blur-md border border-neon-green/30 px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-all duration-500 animate-glow">
+                Start Calculating
+            </button>
+        </div>
+    </section>
+
+    <!-- Crypto Price Cards Section -->
+    <section class="py-20 px-6">
+        <div class="container mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-neon-green to-neon-blue bg-clip-text text-transparent">
+                Live Crypto Prices
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Bitcoin Card -->
+                <div class="crypto-card glass-card bg-dark-card/50 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:scale-105 transition-all duration-500 hover:border-neon-green/50">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-orange-400 to-orange-600 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-white font-bold text-lg">₿</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">Bitcoin</h3>
+                            <p class="text-white/60">BTC</p>
+                        </div>
+                    </div>
+                    <div class="text-2xl font-bold text-neon-green">₹63,00,000</div>
+                </div>
+
+                <!-- Ethereum Card -->
+                <div class="crypto-card glass-card bg-dark-card/50 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:scale-105 transition-all duration-500 hover:border-neon-blue/50">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-400 to-purple-600 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-white font-bold text-lg">Ξ</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">Ethereum</h3>
+                            <p class="text-white/60">ETH</p>
+                        </div>
+                    </div>
+                    <div class="text-2xl font-bold text-neon-blue">₹3,20,000</div>
+                </div>
+
+                <!-- USDT Card -->
+                <div class="crypto-card glass-card bg-dark-card/50 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:scale-105 transition-all duration-500 hover:border-green-500/50">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-white font-bold text-sm">₮</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">Tether</h3>
+                            <p class="text-white/60">USDT</p>
+                        </div>
+                    </div>
+                    <div class="text-2xl font-bold text-green-400">₹83.50</div>
+                </div>
+
+                <!-- Dogecoin Card -->
+                <div class="crypto-card glass-card bg-dark-card/50 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:scale-105 transition-all duration-500 hover:border-yellow-500/50">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-white font-bold text-lg">Ð</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">Dogecoin</h3>
+                            <p class="text-white/60">DOGE</p>
+                        </div>
+                    </div>
+                    <div class="text-2xl font-bold text-yellow-400">₹11.32</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section id="calculator" class="py-20 px-6 bg-gradient-to-b from-transparent to-dark-card/20">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-neon-green to-neon-blue bg-clip-text text-transparent">
+                Crypto Calculator
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Crypto to INR Calculator -->
+                <div class="glass-card bg-dark-card/50 backdrop-blur-md border border-white/10 rounded-2xl p-8">
+                    <h3 class="text-2xl font-bold mb-6 text-neon-green">Crypto to INR</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium mb-2 text-white/80">Select Cryptocurrency</label>
+                            <select id="crypto-select" class="w-full bg-dark-bg/50 border border-white/20 rounded-lg px-4 py-3 text-white focus:border-neon-green focus:ring-2 focus:ring-neon-green/20 transition-all duration-300">
+                                <option value="BTC">Bitcoin (BTC)</option>
+                                <option value="ETH">Ethereum (ETH)</option>
+                                <option value="USDT">Tether (USDT)</option>
+                                <option value="DOGE">Dogecoin (DOGE)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2 text-white/80">Amount</label>
+                            <input type="number" id="crypto-amount" placeholder="Enter crypto amount" class="w-full bg-dark-bg/50 border border-white/20 rounded-lg px-4 py-3 text-white focus:border-neon-green focus:ring-2 focus:ring-neon-green/20 transition-all duration-300" step="0.00000001">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2 text-white/80">INR Value</label>
+                            <div id="inr-result" class="w-full bg-gradient-to-r from-neon-green/10 to-neon-blue/10 border border-neon-green/30 rounded-lg px-4 py-3 text-2xl font-bold text-neon-green min-h-[52px] flex items-center">
+                                ₹0.00
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- INR to Crypto Calculator -->
+                <div class="glass-card bg-dark-card/50 backdrop-blur-md border border-white/10 rounded-2xl p-8">
+                    <h3 class="text-2xl font-bold mb-6 text-neon-blue">INR to Crypto</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium mb-2 text-white/80">Select Cryptocurrency</label>
+                            <select id="crypto-select-reverse" class="w-full bg-dark-bg/50 border border-white/20 rounded-lg px-4 py-3 text-white focus:border-neon-blue focus:ring-2 focus:ring-neon-blue/20 transition-all duration-300">
+                                <option value="BTC">Bitcoin (BTC)</option>
+                                <option value="ETH">Ethereum (ETH)</option>
+                                <option value="USDT">Tether (USDT)</option>
+                                <option value="DOGE">Dogecoin (DOGE)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2 text-white/80">INR Amount</label>
+                            <input type="number" id="inr-amount" placeholder="Enter INR amount" class="w-full bg-dark-bg/50 border border-white/20 rounded-lg px-4 py-3 text-white focus:border-neon-blue focus:ring-2 focus:ring-neon-blue/20 transition-all duration-300" step="0.01">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2 text-white/80">Crypto Value</label>
+                            <div id="crypto-result" class="w-full bg-gradient-to-r from-neon-blue/10 to-neon-green/10 border border-neon-blue/30 rounded-lg px-4 py-3 text-2xl font-bold text-neon-blue min-h-[52px] flex items-center">
+                                0.00000000
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-6">
+        <div class="container mx-auto max-w-4xl text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-neon-green to-neon-blue bg-clip-text text-transparent">
+                About This Tool
+            </h2>
+            <p class="text-xl text-white/80 mb-8 leading-relaxed">
+                This premium cryptocurrency calculator provides instant conversions between popular cryptocurrencies and Indian Rupees (INR). Built with modern web technologies and featuring a sleek glassmorphism design, it offers a seamless experience for crypto enthusiasts and traders. The tool is designed for educational and demonstration purposes, showcasing the power of modern web development.
+            </p>
+            <a href="https://youtube.com" target="_blank" class="inline-flex items-center glass-button bg-gradient-to-r from-red-500/20 to-red-600/20 backdrop-blur-md border border-red-500/30 px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-all duration-500">
+                <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                Watch Tutorial
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-white/10">
+        <div class="container mx-auto text-center">
+            <div class="flex justify-center space-x-8 mb-8">
+                <a href="https://github.com" target="_blank" class="social-icon text-white/60 hover:text-neon-green transition-all duration-300 hover:scale-110">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+                <a href="https://youtube.com" target="_blank" class="social-icon text-white/60 hover:text-red-500 transition-all duration-300 hover:scale-110">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-icon text-white/60 hover:text-neon-blue transition-all duration-300 hover:scale-110">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                </a>
+            </div>
+            <p class="text-white/60">
+                Made with <span class="text-red-500">❤</span> by You B Tech | © 2025
+            </p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
