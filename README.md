@@ -76,7 +76,7 @@ Easily convert between **popular cryptocurrencies** (BTC, ETH, etc.) and **fiat 
 ## 📊 GitHub Stats (Project)
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/pin/?username=Bismay-exe&repo=Crypto-converter&theme=transparent&bg_color=30,000000,434343&title_color=FFD700&text_color=FFFFFF&icon_color=36BCF7&hide_border=true" />
+  <img src="https://github-readme-stats.vercel.app/api/pin/?username=Bismay-exe&repo=Crypto-converter&cache_seconds=60&theme=transparent&bg_color=30,000000,000000&title_color=FFD700&text_color=FFFFFF&icon_color=36BCF7&hide_border=true" />
 </p>
 
 ---
