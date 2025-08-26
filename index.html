@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
@@ -42,7 +42,6 @@
       border: 1px solid rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(10px);
     }
-    .neon-text { text-shadow: 0 0 12px rgba(0,229,255,0.65),0 0 24px rgba(0,255,179,0.35); }
 
     /* ==== 3D Hover + Glow Effects ==== */
     .hover-3d {
@@ -52,14 +51,33 @@
     .hover-3d:hover {
       box-shadow: 0 10px 25px rgba(0,255,170,0.4), 0 0 20px rgba(0,229,255,0.5);
     }
+
+    /* ==== Localized Glow Text ==== */
     .glow-text {
-      transition: all 0.4s ease-in-out;
+      position: relative;
       display: inline-block;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    .glow-text::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      background: radial-gradient(
+        circle 60px at var(--x, 50%) var(--y, 50%),
+        rgba(0, 255, 200, 0.9),
+        transparent 70%
+      );
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
     .glow-text:hover {
       transform: scale(1.1);
-      text-shadow: 0 0 15px #00ffaa, 0 0 30px #00ccff;
-      color: #00ffaa;
+    }
+    .glow-text:hover::after {
+      opacity: 1;
     }
   </style>
 </head>
@@ -96,7 +114,7 @@
   <!-- Calculator -->
   <section id="calculator" class="relative py-16">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <h2 class="text-3xl font-extrabold mb-10 glow-text">Two‑Way Crypto ⇄ INR Calculator</h2>
+      <h2 class="text-3xl font-extrabold mb-10 glow-text">Two-Way Crypto ⇄ INR Calculator</h2>
       <div class="grid lg:grid-cols-2 gap-8">
         <div class="glass rounded-3xl p-8 hover-3d">
           <h3 class="font-semibold text-lg mb-4 glow-text">Crypto → INR</h3>
@@ -175,6 +193,17 @@
     document.querySelectorAll('.hover-3d').forEach(card=>{
       card.addEventListener('mouseleave',()=>{
         card.style.transform="perspective(1000px) rotateX(0) rotateY(0)";
+      });
+    });
+
+    // ==== Localized Glow Tracking ====
+    document.querySelectorAll('.glow-text').forEach(el => {
+      el.addEventListener('mousemove', e => {
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        el.style.setProperty('--x', `${x}px`);
+        el.style.setProperty('--y', `${y}px`);
       });
     });
   </script>
